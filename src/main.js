@@ -6,9 +6,6 @@ import App from "./App.vue";
 import router from "./router";
 import veeValidatePlugins from "@/plugins/vee-validate.js";
 
-import library from "@/components/icons/icon.js";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
 import VueMask from "vue-the-mask";
 
 import Vue3Toasity, { toast } from "vue3-toastify";
@@ -25,7 +22,5 @@ app.use(Vue3Toasity, {
   position: toast.POSITION.TOP_RIGHT,
   theme: "colored",
 });
-
-app.component("font-awesome-icon", FontAwesomeIcon);
 
 app.mount("#app");

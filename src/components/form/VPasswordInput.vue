@@ -15,18 +15,20 @@
       />
       <span
         @click="hide"
-        class="w-[10%] border-none outline-none rounded-e-lg p-2 text-[18px] placeholder:text-color1 bg-white cursor-pointer flex justify-center items-center py-3"
+        class="w-[10%] border-none outline-none rounded-e-lg p-2 text-[18px] placeholder:text-color1 bg-white cursor-pointer flex justify-center items-center py-[9px]"
       >
-        <font-awesome-icon
-          icon="fa-solid fa-eye"
+        <svg-icon
           v-if="hidden"
+          type="mdi"
+          :path="mdiEye"
           class="text-color1"
-        ></font-awesome-icon>
-        <font-awesome-icon
-          icon="fa-solid fa-eye-slash"
+        ></svg-icon>
+        <svg-icon
           v-else
+          type="mdi"
+          :path="mdiEyeOff"
           class="text-color1"
-        ></font-awesome-icon>
+        ></svg-icon>
       </span>
     </div>
     <ErrorMessage :name="name" class="text-[16px] text-red-700 select-none" />
@@ -35,7 +37,8 @@
 
 <script setup>
 import { ref } from "vue";
-
+import SvgIcon from "@jamescoyle/vue-icon";
+import { mdiEye, mdiEyeOff } from "@mdi/js";
 const props = defineProps({
   name: { type: String },
   placeholder: { type: String },

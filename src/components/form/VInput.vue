@@ -12,6 +12,7 @@
       :placeholder="placeholder"
       v-mask="mask"
       masked="true"
+      value="(+998)-"
       class="border outline-none rounded-lg px-3 py-2 text-[18px] placeholder:text-color1/50 focus:border-color1"
     />
     <ErrorMessage :name="name" class="text-[16px] text-red-700 select-none" />
