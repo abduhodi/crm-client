@@ -9,6 +9,11 @@ export default {
       component: () => import("@/pages/admin/StudentPage.vue"),
     },
     {
+      path: "/student/:id",
+      name: "single_student",
+      component: () => import("@/pages/admin/SingleStudent.vue"),
+    },
+    {
       path: "/groups",
       name: "groups",
       component: () => import("@/pages/admin/GroupPage.vue"),

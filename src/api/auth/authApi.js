@@ -1,4 +1,4 @@
-import axiosClient from "@/api/apiClient";
+import axiosClient from "@/api/axios/apiClient";
 
 export const authApi = {
   login(payload) {

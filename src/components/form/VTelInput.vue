@@ -1,6 +1,7 @@
 <template>
   <div class="w-fit flex flex-col gap-1 relative text-[18px]">
     <input
+      id="tel_input"
       type="text"
       placeholder="Phone"
       v-model="phone"

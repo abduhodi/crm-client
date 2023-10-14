@@ -6,6 +6,9 @@ import App from "./App.vue";
 import router from "./router";
 import veeValidatePlugins from "@/plugins/vee-validate.js";
 
+import VueAwesomePaginate from "vue-awesome-paginate";
+import "vue-awesome-paginate/dist/style.css";
+
 import VueMask from "vue-the-mask";
 
 import Vue3Toasity, { toast } from "vue3-toastify";
@@ -22,5 +25,6 @@ app.use(Vue3Toasity, {
   position: toast.POSITION.TOP_RIGHT,
   theme: "colored",
 });
+app.use(VueAwesomePaginate);
 
 app.mount("#app");

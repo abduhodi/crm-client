@@ -1,12 +1,11 @@
 <template>
-  <div class="w-full h-screen flex justify-between">
-    <Sidebar
-      :menu="AdminMenu"
-      class="w-[223px] h-full bg-color1 pt-[70px]"
-    ></Sidebar>
-    <div class="right">
+  <div class="w-full h-screen flex select-none">
+    <Sidebar class="h-full"></Sidebar>
+    <div class="w-full flex flex-col">
       <Header></Header>
-      <router-view></router-view>
+      <div class="pl-7 pb-5 pr-3 overflow-auto bg-[#E7EDF0] h-full">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -14,11 +13,6 @@
 <script setup>
 import Sidebar from "@/components/header/Sidebar.vue";
 import Header from "@/components/header/Header.vue";
-import { AdminMenu } from "@/components/menu/AdminMenu.js";
 </script>
 
-<style lang="scss" scoped>
-.right {
-  width: calc((100% - 224px));
-}
-</style>
+<style lang="scss" scoped></style>
