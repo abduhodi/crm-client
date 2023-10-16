@@ -12,4 +12,13 @@ const router = createRouter({
   routes: [auth, admin, director, teacher, student, notFound],
 });
 
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem("token");
+
+  if (!token && to.path !== "/") return next({ path: "/" });
+  else if (token && to.path == "/") return next({ path: "/admin" });
+
+  return next();
+});
+
 export default router;

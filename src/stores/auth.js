@@ -19,7 +19,7 @@ export const useAuthStore = defineStore("auth", {
           localStorage.setItem("role", data?.user?.role);
         }
         if (this.user?.user?.role === "admin") {
-          router.push({ name: "admin" });
+          router.push({ name: "students" });
         } else if (this.user?.user?.role === "student") {
           router.push({ name: "student" });
         } else if (this.user?.user?.role === "director") {

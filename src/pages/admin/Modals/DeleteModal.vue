@@ -60,6 +60,7 @@ const confirm = async () => {
     danger("Failed!");
   }
   dialog.value = false;
+  location.reload();
 };
 
 const openModal = (id) => {

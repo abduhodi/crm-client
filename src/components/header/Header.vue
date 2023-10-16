@@ -31,6 +31,7 @@
             >setting</span
           >
           <span
+            @click="logout"
             class="text-[18px] duration-100 w-full text-center hover:bg-color1 hover:text-white cursor-pointer select-none"
             >logout</span
           >
@@ -56,6 +57,11 @@ const rotate = (e) => {
   } else {
     console.log((e.target.style.rotate = "0deg"));
   }
+};
+
+const logout = () => {
+  localStorage.clear();
+  location.reload();
 };
 </script>
 

@@ -32,25 +32,27 @@
               ><input type="checkbox" class="w-[18px] h-[18px]"
             /></span>
           </template>
-          <template #body_id="{ item }">
+          <!-- <template #body_id="{ item }">
             {{ item._id }}
-          </template>
+          </template> -->
           <template #body_full_name="{ item }">
-            {{ `${item.first_name} ${item.last_name}` }}
+            <span @click="selectOne(item._id)" class="w-full">{{
+              `${item.first_name} ${item.last_name}`
+            }}</span>
           </template>
           <template #body_action="{ item }">
-            <span class="flex justify-center items-center gap-2 z-50">
+            <span class="flex justify-center items-center gap-2 z-90">
               <svg-icon
                 type="mdi"
                 :path="mdiPencil"
                 @click="openModal(item)"
-                class="hover:text-orange-600 z-50"
+                class="hover:text-orange-600 z-90"
               ></svg-icon>
               <svg-icon
                 type="mdi"
                 :path="mdiTrashCanOutline"
                 @click="deleteStudent(item._id)"
-                class="hover:text-red-900 z-50"
+                class="hover:text-red-900 z-90"
               ></svg-icon>
             </span>
           </template>
@@ -86,7 +88,9 @@ import Table from "@/components/ui/Table.vue";
 import { danger, success, warning } from "@/plugins/Notification";
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiPencil, mdiTrashCanOutline } from "@mdi/js";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const store = useAdminStore();
 
 const deleteStudent = (id) => {
@@ -111,7 +115,7 @@ const delete_modal = ref();
 
 const header = ref([
   { title: "checkbox", value: "check" },
-  { title: "ID", value: "id" },
+  { title: "ID", value: "_id" },
   { title: "Full name", value: "full_name" },
   { title: "Phone number", value: "phone" },
   { title: "Courses", value: "courses" },
@@ -125,6 +129,10 @@ const count = ref(0);
 onMounted(async () => {
   count.value = await store.getStudents(params.value);
 });
+
+const selectOne = (id) => {
+  router.push({ path: `/student/${id}` });
+};
 </script>
 
 <style lang="scss">

@@ -111,6 +111,7 @@ const addStudent = async (value) => {
     if (res) {
       success("successfully updated ");
       dialog.value = false;
+      location.reload();
     } else {
       console.log(store.error, "error");
       danger(store.error.message);
@@ -126,6 +127,7 @@ const addStudent = async (value) => {
     if (res) {
       success("successfully added ");
       dialog.value = false;
+      location.reload();
     } else {
       danger(store.error);
     }

@@ -21,10 +21,9 @@
     </thead>
     <tbody class="text-left">
       <tr
-        class="bg-[#F6FBFF] text-[#065FD4] px-5 h-[70px] select-none cursor-pointer hover:bg-[#ebf6ff]"
+        class="bg-[#F6FBFF] text-[#065FD4] px-5 h-[70px] select-none cursor-pointer hover:bg-[#ebf6ff] z-10"
         v-for="(item, index) in data"
         :key="index"
-        @click="selectOne(item._id)"
       >
         <td class="pr-5" v-for="(col, ind) in header" :key="ind">
           <slot :name="`body_${col.value}`" :item="item">
@@ -37,8 +36,8 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router";
-const router = useRouter();
+// import { useRouter } from "vue-router";
+// const router = useRouter();
 const props = defineProps({
   header: Array,
   data: Array,
@@ -48,9 +47,9 @@ const selectAll = (val) => {
   // console.log(val.target.checked);
 };
 
-const selectOne = (id) => {
-  router.push({ path: `/student/${id}` });
-};
+// const selectOne = (id) => {
+//   router.push({ path: `/student/${id}` });
+// };
 </script>
 
 <style lang="scss" scoped></style>
