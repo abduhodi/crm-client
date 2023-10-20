@@ -1,19 +1,19 @@
 import { defineStore } from "pinia";
-import { adminStudentApi } from "@/api/admin/adminStudentApi";
-export const useAdminStudentStore = defineStore("admin-student", {
+import { adminGroupApi } from "@/api/admin/adminGroupApi";
+export const useAdminGroupStore = defineStore("admin-group", {
   state: () => ({
-    students: null,
+    groups: null,
     loading: false,
     error: null,
     status: null,
-    student: null,
+    group: null,
   }),
   actions: {
-    async addStudent(payload) {
+    async addGroup(payload) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.addStudent(payload);
-        this.student = res.student;
+        const res = await adminGroupApi.addGroup(payload);
+        this.group = res.group;
         console.log(res);
         return true;
       } catch (error) {
@@ -24,11 +24,11 @@ export const useAdminStudentStore = defineStore("admin-student", {
         this.loading = false;
       }
     },
-    async getStudents(params) {
+    async getGroups(params) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.getStudents(params);
-        this.students = res.students;
+        const res = await adminGroupApi.getGroups(params);
+        this.groups = res.groups;
         return res?.count;
       } catch (error) {
         this.error = error?.response?.data;
@@ -38,12 +38,11 @@ export const useAdminStudentStore = defineStore("admin-student", {
         this.loading = false;
       }
     },
-    async updateStudent(payload, param) {
+    async updateGroup(payload, param) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.updateStudent(payload, param);
-        this.student = res.student;
-        console.log(res);
+        const res = await adminGroupApi.updateGroup(payload, param);
+        this.group = res.group;
         return true;
       } catch (error) {
         this.error = error?.response?.data;
@@ -54,12 +53,11 @@ export const useAdminStudentStore = defineStore("admin-student", {
       }
     },
 
-    async deleteStudent(param) {
+    async deleteGroup(param) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.deleteStudent(param);
-        this.student = res.student;
-        console.log(res);
+        const res = await adminGroupApi.deleteGroup(param);
+        this.group = res.group;
         return true;
       } catch (error) {
         this.error = error?.response?.data;
@@ -70,12 +68,11 @@ export const useAdminStudentStore = defineStore("admin-student", {
       }
     },
 
-    async getStudentById(param) {
+    async getGroupById(param) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.getStudentById(param);
-        this.student = res.student;
-        console.log(res);
+        const res = await adminGroupApi.getGroupById(param);
+        this.group = res.group;
         return true;
       } catch (error) {
         this.error = error?.response?.data;
@@ -83,6 +80,18 @@ export const useAdminStudentStore = defineStore("admin-student", {
         return false;
       } finally {
         this.loading = false;
+      }
+    },
+
+    async getAvailableRooms(payload) {
+      try {
+        const res = await adminGroupApi.getAvailableRooms(payload);
+        return res;
+      } catch (error) {
+        this.error = error?.response?.data;
+        console.log(error);
+        return false;
+      } finally {
       }
     },
   },

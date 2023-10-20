@@ -3,6 +3,6 @@ export default {
   name: "director",
   component: () => import("@/pages/director/DirectorPage.vue"),
   meta: {
-    requiresAuth: true,
+    requiresDirector: true,
   },
 };

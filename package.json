@@ -1,6 +1,6 @@
 {
   "name": "vue-project",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -12,9 +12,8 @@
     "@mdi/js": "7.3.67",
     "@vee-validate/rules": "^4.11.8",
     "axios": "^1.5.1",
-    "countries-list": "^3.0.5",
-    "flag-icons": "^6.11.1",
-    "libphonenumber-js": "^1.10.47",
+    "element-plus": "^2.4.1",
+    "moment": "^2.29.4",
     "pinia": "^2.1.6",
     "vee-validate": "^4.11.8",
     "vue": "^3.3.4",

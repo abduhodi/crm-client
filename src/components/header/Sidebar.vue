@@ -11,8 +11,8 @@
     >
       <span v-for="(item, index) in AdminMenu" :key="index">
         <router-link
-          :class="index === 0 ? 'border-t border-color_bg' : ''"
-          class="flex justify-start gap-4 items-center font-normal text-white text-[20px] pl-[30px] py-[15px] select-none transition-all duration-200"
+          :class="{ 'router-link-active': $route.meta.child === item.keys }"
+          class="sidebar flex justify-start gap-4 items-center font-normal text-white text-[20px] pl-[30px] py-[15px] select-none transition-all duration-200"
           :to="item.path"
           ><Icon type="mdi" :path="item.icon" class="text-[20px]"></Icon>
           {{ item.label }}</router-link
@@ -37,4 +37,6 @@ const props = defineProps({
   background: #f5fccd;
   color: #12486b;
 }
+
+//:class="index === 0 ? 'border-t border-color_bg' : ''" ;
 </style>

@@ -11,6 +11,7 @@
         :type="hidden ? 'password' : 'text'"
         :name="name"
         :placeholder="placeholder"
+        :disabled="disabled"
         class="custom_style border outline-none rounded-s-lg px-3 py-2 text-[18px] placeholder:text-color1/50 w-[89%] focus:border-color1 select-none"
       />
       <span
@@ -42,6 +43,7 @@ import { mdiEye, mdiEyeOff } from "@mdi/js";
 const props = defineProps({
   name: { type: String },
   placeholder: { type: String },
+  disabled: { type: Boolean, default: false },
 });
 const hidden = ref(true);
 const hide = () => {

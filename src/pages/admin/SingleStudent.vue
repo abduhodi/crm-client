@@ -58,9 +58,9 @@ import { mdiArrowLeft } from "@mdi/js";
 
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useAdminStore } from "@/stores/admin";
+import { useAdminStudentStore } from "@/stores/admin/student";
 
-const store = useAdminStore();
+const store = useAdminStudentStore();
 const route = useRoute();
 const router = useRouter();
 

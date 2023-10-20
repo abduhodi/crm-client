@@ -14,6 +14,9 @@ import VueMask from "vue-the-mask";
 import Vue3Toasity, { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
+
 const app = createApp(App);
 
 app.use(createPinia());
@@ -26,5 +29,6 @@ app.use(Vue3Toasity, {
   theme: "colored",
 });
 app.use(VueAwesomePaginate);
+app.use(ElementPlus);
 
 app.mount("#app");

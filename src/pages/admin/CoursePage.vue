@@ -1,28 +1,28 @@
 <template>
   <div class="w-full pt-5">
     <div class="w-full">
-      <student-modal ref="student_modal"></student-modal>
+      <course-modal ref="course_modal"></course-modal>
     </div>
     <loader v-if="store.loading"></loader>
     <div v-else>
       <div class="w-full flex justify-between items-center pr-5">
         <h1 class="text-[#002842] text-[22px] font-semibold uppercase">
-          Students ({{ count }})
+          Courses ({{ count }})
         </h1>
         <v-button
           type="button"
           btn_type="primary"
           :isLoading="false"
-          @click="student_modal.openModal"
+          @click="course_modal.openModal"
           class="px-10"
-          >Add student</v-button
+          >Add course</v-button
         >
       </div>
       <div class="w-full mt-5">
         <Table
-          v-if="store?.students?.length"
+          v-if="store?.courses?.length"
           :header="header"
-          :data="store?.students"
+          :data="store?.courses"
         >
           <template #body_check>
             <span class="w-full flex justify-center items-center"
@@ -32,14 +32,14 @@
           <!-- <template #body_id="{ item }">
             {{ item._id }}
           </template> -->
-          <template #body_full_name="{ item }">
+          <template #body_name="{ item }">
             <span @click="selectOne(item._id)" class="w-full">{{
-              `${item.first_name} ${item.last_name}`
+              `${item.name}`
             }}</span>
           </template>
           <template #body_action="{ item }">
             <span class="w-full flex justify-start items-center">
-              <VAction :item="item" :item_action="student_modal"></VAction>
+              <VAction :item="item" :item_action="course_modal"></VAction>
             </span>
           </template>
         </Table>
@@ -50,7 +50,7 @@
           No data
         </h1>
         <div
-          v-if="store?.students?.length"
+          v-if="store?.courses?.length"
           class="w-full flex justify-end px-5 items-center mt-3"
         >
           <vue-awesome-paginate
@@ -67,20 +67,20 @@
 </template>
 
 <script setup>
-import StudentModal from "@/pages/admin/Modals/StudentModal.vue";
+import CourseModal from "@/pages/admin/Modals/CourseModal.vue";
 import Loader from "@/components/loader/Loader.vue";
 import { onMounted, ref } from "vue";
-import { useAdminStudentStore } from "@/stores/admin/student.js";
+import { useAdminCourseStore } from "@/stores/admin/course.js";
 import VButton from "@/components/form/VButton.vue";
 import Table from "@/components/ui/Table.vue";
 import { useRouter } from "vue-router";
 import VAction from "@/components/ui/VAction.vue";
 
 const router = useRouter();
-const store = useAdminStudentStore();
+const store = useAdminCourseStore();
 
 const onClickHandler = async () => {
-  count.value = await store.getStudents(params.value);
+  count.value = await store.getCourses(params.value);
 };
 
 const params = ref({
@@ -89,30 +89,28 @@ const params = ref({
 });
 
 const openModal = (item) => {
-  student_modal.openModal(item);
+  course_modal.openModal(item);
 };
 
-const student_modal = ref("");
+const course_modal = ref("");
 
 const header = ref([
   { title: "checkbox", value: "check" },
   { title: "ID", value: "_id" },
-  { title: "Full name", value: "full_name" },
-  { title: "Phone number", value: "phone" },
-  { title: "Courses", value: "courses" },
-  { title: "Groups", value: "groups" },
-  { title: "Status", value: "status" },
+  { title: "Course name", value: "name" },
+  { title: "Price", value: "price" },
+  { title: "Period", value: "period" },
   { title: "Action", value: "action" },
 ]);
 
 const count = ref(0);
 
 onMounted(async () => {
-  count.value = await store.getStudents(params.value);
+  count.value = await store.getCourses(params.value);
 });
 
 const selectOne = (id) => {
-  router.push({ path: `/students/${id}` });
+  router.push({ path: `/courses/${id}` });
 };
 </script>
 

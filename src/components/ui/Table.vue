@@ -21,7 +21,7 @@
     </thead>
     <tbody class="text-left">
       <tr
-        class="bg-[#F6FBFF] text-[#065FD4] px-5 h-[70px] select-none cursor-pointer hover:bg-[#ebf6ff] z-10"
+        class="bg-[#F6FBFF] text-[#065FD4] px-5 h-[70px] select-none cursor-pointer hover:bg-[#ebf6ff]"
         v-for="(item, index) in data"
         :key="index"
       >

@@ -6,6 +6,7 @@ import notFound from "@/router/notFound";
 import student from "@/router/student";
 import teacher from "@/router/teacher";
 import auth from "@/router/auth";
+// import profile from "@/router/profile";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

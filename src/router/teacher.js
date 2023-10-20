@@ -3,6 +3,6 @@ export default {
   name: "teacher",
   component: () => import("@/pages/teacher/TeacherPage.vue"),
   meta: {
-    requiresAuth: true,
+    requiresTeacher: true,
   },
 };

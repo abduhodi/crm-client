@@ -14,7 +14,8 @@
       v-mask="mask"
       masked="true"
       value=""
-      class="w-full border outline-none rounded-lg px-3 py-2 text-[18px] placeholder:text-color1/50 focus:border-color1"
+      :disabled="disabled"
+      class="w-full border outline-none rounded-lg px-3 py-2 text-[18px] placeholder:text-color1/50 focus:border-color1 disabled:text-gray-400 disabled:cursor-not-allowed"
     />
     <vee-field
       v-else
@@ -23,7 +24,8 @@
       :name="name"
       :placeholder="placeholder"
       value=""
-      class="w-full border outline-none rounded-lg px-3 py-2 text-[18px] placeholder:text-color1/50 focus:border-color1"
+      :disabled="disabled"
+      class="w-full border outline-none rounded-lg px-3 py-2 text-[18px] placeholder:text-color1/50 focus:border-color1 disabled:text-gray-400 disabled:cursor-not-allowed"
     />
     <ErrorMessage :name="name" class="text-[16px] text-red-700 select-none" />
   </div>
@@ -36,6 +38,7 @@ const props = defineProps({
   type: { type: String, default: "text" },
   placeholder: { type: String },
   mask: { type: String },
+  disabled: { type: Boolean, default: false },
 });
 </script>
 

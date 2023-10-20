@@ -1,19 +1,19 @@
 import { defineStore } from "pinia";
-import { adminStudentApi } from "../api/admin/adminStudentApi";
-export const useAdminStore = defineStore("admin", {
+import { adminRoomApi } from "@/api/admin/adminRoomApi";
+export const useAdminRoomStore = defineStore("admin-room", {
   state: () => ({
-    students: null,
+    rooms: null,
     loading: false,
     error: null,
     status: null,
-    student: null,
+    room: null,
   }),
   actions: {
-    async addStudent(payload) {
+    async addRoom(payload) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.addStudent(payload);
-        this.student = res.student;
+        const res = await adminRoomApi.addRoom(payload);
+        this.room = res.room;
         console.log(res);
         return true;
       } catch (error) {
@@ -24,11 +24,11 @@ export const useAdminStore = defineStore("admin", {
         this.loading = false;
       }
     },
-    async getStudents(params) {
+    async getRooms(params) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.getStudents(params);
-        this.students = res.students;
+        const res = await adminRoomApi.getRooms(params);
+        this.rooms = res.rooms;
         return res?.count;
       } catch (error) {
         this.error = error?.response?.data;
@@ -38,11 +38,11 @@ export const useAdminStore = defineStore("admin", {
         this.loading = false;
       }
     },
-    async updateStudent(payload, param) {
+    async updateRoom(payload, param) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.updateStudent(payload, param);
-        this.student = res.student;
+        const res = await adminRoomApi.updateRoom(payload, param);
+        this.room = res.room;
         console.log(res);
         return true;
       } catch (error) {
@@ -54,11 +54,11 @@ export const useAdminStore = defineStore("admin", {
       }
     },
 
-    async deleteStudent(param) {
+    async deleteRoom(param) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.deleteStudent(param);
-        this.student = res.student;
+        const res = await adminRoomApi.deleteRoom(param);
+        this.room = res.room;
         console.log(res);
         return true;
       } catch (error) {
@@ -70,11 +70,11 @@ export const useAdminStore = defineStore("admin", {
       }
     },
 
-    async getStudentById(param) {
+    async getRoomById(param) {
       try {
         this.loading = true;
-        const res = await adminStudentApi.getStudentById(param);
-        this.student = res.student;
+        const res = await adminRoomApi.getRoomById(param);
+        this.room = res.room;
         console.log(res);
         return true;
       } catch (error) {

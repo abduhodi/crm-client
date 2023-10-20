@@ -42,26 +42,27 @@
     <vee-form
       :validation-schema="schema"
       :initial-values="forms"
-      @submit="addStudent"
+      @submit="addCourse"
     >
       <VInput
         type="text"
-        name="first_name"
-        label="First Name"
-        placeholder="Enter your name"
+        name="name"
+        label="Course Name"
+        placeholder="Enter course name"
       ></VInput>
       <VInput
-        type="text"
-        name="last_name"
-        label="Last Name"
-        placeholder="Enter your surname"
+        type="number"
+        name="price"
+        label="Price"
+        placeholder="Enter course price"
+        class="example"
       ></VInput>
       <VInput
-        type="text"
-        name="phone"
-        label="Phone"
-        placeholder="(+998)-90-123-45-67"
-        :mask="'(+998)-##-###-##-##'"
+        type="number"
+        name="period"
+        label="Period"
+        placeholder="Enter course period"
+        class="example"
       ></VInput>
       <VButton
         btn_type="primary"
@@ -81,16 +82,16 @@ import AppModal from "@/components/ui/app-modal.vue";
 import { danger, success, warning } from "@/plugins/Notification.js";
 import VInput from "@/components/form/VInput.vue";
 import VButton from "@/components/form/VButton.vue";
-import { useAdminStudentStore } from "@/stores/admin/student.js";
+import { useAdminCourseStore } from "@/stores/admin/course.js";
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiAlertCircleOutline } from "@mdi/js";
 
-const store = useAdminStudentStore();
+const store = useAdminCourseStore();
 
 const openDeleteModal = ref(false);
 const openEditModal = ref(false);
 
-const title = ref("Add New Student");
+const title = ref("Add New Course");
 const ID = ref(null);
 const del_title = ref("Are you sure to delete?");
 const btn_title = computed(() => {
@@ -102,23 +103,22 @@ const btn_title = computed(() => {
 });
 
 const forms = ref({
-  first_name: "",
-  last_name: "",
-  phone: "",
+  name: "",
+  price: 0,
+  period: 0,
 });
 
 watch(openEditModal, (val) => {
   if (!val) {
     forms.value = {};
-    title.value = "Add New Student";
+    title.value = "Add New Course";
   }
 });
 
 const openModal = (item) => {
   if (item._id) {
     forms.value = { ...item };
-    title.value = "Edit Student";
-    console.log(forms.value, "forms");
+    title.value = "Edit Course";
   }
   openEditModal.value = true;
 };
@@ -138,21 +138,17 @@ const closeModal = () => {
 
 const schema = computed(() => {
   return {
-    last_name: "required|min:3|max:30",
-    first_name: "required|min:3|max:30",
-    phone: "required|phone:19",
+    name: "required|min:2|max:30",
+    price: "required",
+    period: "required",
   };
 });
 
-const addStudent = async (value) => {
+const addCourse = async (value) => {
   if (forms.value?._id) {
-    const res = await store.updateStudent(
+    const res = await store.updateCourse(
       {
         ...value,
-        phone: value.phone
-          .split("")
-          .filter((char) => char === "+" || !isNaN(+char))
-          .join(""),
       },
       forms.value?._id
     );
@@ -167,10 +163,6 @@ const addStudent = async (value) => {
   } else {
     const res = await store.addStudent({
       ...value,
-      phone: value.phone
-        .split("")
-        .filter((char) => char === "+" || !isNaN(+char))
-        .join(""),
     });
     if (res) {
       success("successfully added ");
@@ -183,7 +175,7 @@ const addStudent = async (value) => {
 };
 
 const confirm = async () => {
-  const res = await store.deleteStudent(ID.value);
+  const res = await store.deleteCourse(ID.value);
   if (res) {
     warning("Deleted success");
   } else {
