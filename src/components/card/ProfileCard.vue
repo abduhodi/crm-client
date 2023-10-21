@@ -34,6 +34,12 @@
         <span class="text-[#3D444F] text-[12px]">Status:</span>
         <span class="text-[#065FD4] text-[14px]">{{ data?.status }}</span>
       </div>
+      <div class="w-full flex justify-between items-center">
+        <span class="text-[#3D444F] text-[12px]">Start Date:</span>
+        <span class="text-[#065FD4] text-[14px]">{{
+          format(data?.start_date)
+        }}</span>
+      </div>
     </div>
     <div class="w-1/2 flex flex-col">
       <vee-form
@@ -106,6 +112,7 @@ import { computed, ref, watch } from "vue";
 import { useAuthStore } from "@/stores/auth/auth.js";
 import VButton from "@/components/form/VButton.vue";
 import { danger, success } from "@/plugins/Notification.js";
+import moment from "moment";
 
 const authStore = useAuthStore();
 
@@ -118,9 +125,15 @@ const props = defineProps({
     status: null,
     phone: "",
     image: "",
+    role: "",
+    start_date: "",
     _id: "",
   },
 });
+
+const format = (date) => {
+  return new Date(date).toDateString();
+};
 
 const cancel = () => {
   disabled.value = true;

@@ -9,7 +9,7 @@
       :class="isOpen ? 'translate-x-0' : '-translate-x-full'"
       class="w-[223px] bg-color1 pt-[70px] inset-y-0 fixed left-0 z-10 overflow-y-auto duration-300 lg:translate-x-0 lg:static"
     >
-      <span v-for="(item, index) in AdminMenu" :key="index">
+      <span v-for="(item, index) in menu" :key="index">
         <router-link
           :class="{ 'router-link-active': $route.meta.child === item.keys }"
           class="sidebar flex justify-start gap-4 items-center font-normal text-white text-[20px] pl-[30px] py-[15px] select-none transition-all duration-200"
@@ -26,9 +26,18 @@
 import Icon from "@jamescoyle/vue-icon";
 import { useSideBar } from "@/hooks/UseSideBar.js";
 import { AdminMenu } from "@/components/menu/AdminMenu.js";
+import { DirectorMenu } from "@/components/menu/DirectorMenu.js";
+import { computed } from "vue";
 const isOpen = useSideBar();
 const props = defineProps({
   menu: Array,
+});
+
+const menu = computed(() => {
+  const role = localStorage.getItem("role");
+  if (role === "admin") return AdminMenu;
+  if (role === "director") return DirectorMenu;
+  return [];
 });
 </script>
 

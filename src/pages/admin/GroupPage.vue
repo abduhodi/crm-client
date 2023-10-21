@@ -52,14 +52,14 @@
           <template #body_status="{ item }">
             <span>{{ item?.status ? "Started" : "Finished" }}</span>
           </template>
-          <template #body_room_id="{ item }">
+          <template #body_room="{ item }">
             <span>{{
-              item?.room_id?.name ? `${item?.room_id?.name}` : "No data"
+              item?.room?.name ? `${item?.room?.name}` : "No data"
             }}</span>
           </template>
-          <template #body_course_id="{ item }">
+          <template #body_course="{ item }">
             <span>{{
-              item?.course_id?.name ? `${item?.course_id?.name}` : "No data"
+              item?.course?.name ? `${item?.course?.name}` : "No data"
             }}</span>
           </template>
           <template #body_action="{ item }">
@@ -142,8 +142,8 @@ const header = ref([
   { title: "Start Time", value: "start_time" },
   { title: "Finish Time", value: "end_time" },
   { title: "Status", value: "status" },
-  { title: "Room info", value: "room_id" },
-  { title: "Course info", value: "course_id" },
+  { title: "Room info", value: "room" },
+  { title: "Course info", value: "course" },
   { title: "Action", value: "action" },
 ]);
 
