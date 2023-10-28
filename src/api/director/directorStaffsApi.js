@@ -22,8 +22,13 @@ export const directorStaffsApi = {
   },
 
   addStaff(payload) {
-    const url = `teachers/add-staff`;
+    const url = `director/add-staff`;
     return axiosClient.post(url, payload);
+  },
+
+  deleteStaff(id) {
+    const url = `director/delete-staff/${id}`;
+    return axiosClient.delete(url);
   },
 
   addTeacher(payload) {

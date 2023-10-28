@@ -7,11 +7,11 @@ export const useDirectorStaffsStore = defineStore("director-staff", {
     error: null,
     status: null,
     staff: null,
+    loadingRoles: false,
   }),
   actions: {
     async addStaff(payload) {
       try {
-        this.loading = true;
         const res = await directorStaffsApi.addStaff(payload);
         this.staff = res.staff;
         console.log(res);
@@ -21,7 +21,6 @@ export const useDirectorStaffsStore = defineStore("director-staff", {
         console.log(error);
         return false;
       } finally {
-        this.loading = false;
       }
     },
     async getStaffs(params) {
@@ -30,7 +29,7 @@ export const useDirectorStaffsStore = defineStore("director-staff", {
         const res = await directorStaffsApi.getStaffs(params);
         this.staffs = res.staffs;
         console.log(res);
-        return res?.count;
+        return res;
       } catch (error) {
         this.error = error?.response?.data;
         console.log(error);
@@ -42,7 +41,7 @@ export const useDirectorStaffsStore = defineStore("director-staff", {
 
     async getRoles() {
       try {
-        this.loading = true;
+        this.loadingRoles = true;
         const res = await directorStaffsApi.getRoles();
         console.log(res);
         return res?.roles ? res.roles : [];
@@ -51,7 +50,20 @@ export const useDirectorStaffsStore = defineStore("director-staff", {
         console.log(error);
         return false;
       } finally {
-        this.loading = false;
+        this.loadingRoles = false;
+      }
+    },
+
+    async deleteStaff(id) {
+      try {
+        const res = await directorStaffsApi.deleteStaff(id);
+        console.log(res);
+        return true;
+      } catch (error) {
+        this.error = error?.response?.data;
+        console.log(error);
+        return false;
+      } finally {
       }
     },
   },

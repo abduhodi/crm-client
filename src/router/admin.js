@@ -37,7 +37,7 @@ export default {
         child: "courses",
         requiresAdminRole: true,
       },
-      component: () => import("@/pages/admin/CoursePage.vue"),
+      component: () => import("@/pages/admin/SingleCourse.vue"),
     },
     {
       path: "/groups",
@@ -55,7 +55,7 @@ export default {
         child: "groups",
         requiresAdminRole: true,
       },
-      component: () => import("@/pages/admin/GroupPage.vue"),
+      component: () => import("@/pages/admin/SingleGroup.vue"),
     },
     {
       path: "/rooms",

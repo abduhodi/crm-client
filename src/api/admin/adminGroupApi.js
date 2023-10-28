@@ -11,6 +11,11 @@ export const adminGroupApi = {
     return axiosClient.get(url);
   },
 
+  getGroupStudents(id) {
+    const url = `groups/attendance/${id}/all/q?`;
+    return axiosClient.get(url);
+  },
+
   getAvailableRooms(payload) {
     const url = `groups/available-rooms`;
     return axiosClient.post(url, payload);
@@ -29,5 +34,20 @@ export const adminGroupApi = {
   deleteGroup(id) {
     const url = `groups/delete/${id}`;
     return axiosClient.delete(url);
+  },
+
+  addStudentToGroup(payload) {
+    const url = `groups/add-student`;
+    return axiosClient.post(url, payload);
+  },
+
+  addTeacherToGroup(payload) {
+    const url = `groups/add-teacher`;
+    return axiosClient.post(url, payload);
+  },
+
+  getGroupCourseTeachers(id) {
+    const url = `courses/all-teachers/${id}`;
+    return axiosClient.get(url);
   },
 };

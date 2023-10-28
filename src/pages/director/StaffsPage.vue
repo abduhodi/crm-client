@@ -1,7 +1,7 @@
 <template>
   <div class="w-full pt-5">
     <div class="w-full">
-      <staff-modal ref="staff_modal"></staff-modal>
+      <staff-modal ref="staff_modal" :roles="roles"></staff-modal>
     </div>
     <loader v-if="store.loading"></loader>
     <div v-else>
@@ -13,7 +13,7 @@
         <v-button
           type="button"
           btn_type="primary"
-          :isLoading="false"
+          :isLoading="store?.loadingRoles"
           @click="staff_modal.openModal"
           class="px-10"
           >Add Staff</v-button
@@ -27,8 +27,14 @@
           class="text-[#002842] text-[16px] font-medium bg-transparent outline-none"
         >
           <option value="" selected hidden>by role</option>
-          <option value="admin" class="">admin</option>
-          <option value="admin" class="">admin</option>
+          <option
+            v-for="(role, ind) in roles"
+            :key="ind"
+            :value="role?._id"
+            class=""
+          >
+            {{ role?.name }}
+          </option>
         </select>
         <button
           @click="clearFilters"
@@ -99,6 +105,10 @@ import VAction from "@/components/ui/VAction.vue";
 const router = useRouter();
 const store = useDirectorStaffsStore();
 
+const staff_modal = ref("");
+
+const roles = ref([]);
+
 const filters = ref({
   role: "",
   status: null,
@@ -128,8 +138,6 @@ const openModal = (item) => {
   staff_modal.openModal(item);
 };
 
-const staff_modal = ref("");
-
 const header = ref([
   { title: "checkbox", value: "check" },
   { title: "ID", value: "_id" },
@@ -144,7 +152,12 @@ const header = ref([
 const count = ref(0);
 
 onMounted(async () => {
-  count.value = await store.getStaffs(params.value);
+  const res = await Promise.all([
+    store.getStaffs(params.value),
+    store.getRoles(),
+  ]);
+  count.value = res[0]?.count;
+  roles.value = res[1];
 });
 
 const selectOne = (id) => {

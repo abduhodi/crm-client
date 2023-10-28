@@ -13,7 +13,6 @@
       :placeholder="placeholder"
       v-mask="mask"
       masked="true"
-      value=""
       :disabled="disabled"
       class="w-full border outline-none rounded-lg px-3 py-2 text-[18px] placeholder:text-color1/50 focus:border-color1 disabled:text-gray-400 disabled:cursor-not-allowed"
     />
@@ -23,7 +22,6 @@
       :type="type"
       :name="name"
       :placeholder="placeholder"
-      value=""
       :disabled="disabled"
       class="w-full border outline-none rounded-lg px-3 py-2 text-[18px] placeholder:text-color1/50 focus:border-color1 disabled:text-gray-400 disabled:cursor-not-allowed"
     />

@@ -2,7 +2,7 @@
   <button
     :class="classess"
     :disabled="isLoading"
-    class="flex justify-center items-center p-[10px] rounded-full border-none disabled:cursor-not-allowed text-white text-[16px]"
+    class="flex justify-center items-center px-5 py-2 rounded-full border-none disabled:cursor-not-allowed text-white text-[18px]"
   >
     <slot></slot>
     <div v-if="isLoading">

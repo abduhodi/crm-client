@@ -17,6 +17,8 @@ import "vue3-toastify/dist/index.css";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
+import "../node_modules/nprogress/nprogress.css";
+
 const app = createApp(App);
 
 app.use(createPinia());

@@ -13,7 +13,7 @@
           type="button"
           btn_type="primary"
           :isLoading="false"
-          @click="student_modal.openModal"
+          @click="student_modal?.openModal"
           class="px-10"
           >Add student</v-button
         >
@@ -29,9 +29,6 @@
               ><input type="checkbox" class="w-[18px] h-[18px]"
             /></span>
           </template>
-          <!-- <template #body_id="{ item }">
-            {{ item._id }}
-          </template> -->
           <template #body_full_name="{ item }">
             <span @click="selectOne(item._id)" class="w-full">{{
               `${item.first_name} ${item.last_name}`
@@ -89,18 +86,16 @@ const params = ref({
 });
 
 const openModal = (item) => {
-  student_modal.openModal(item);
+  student_modal?.openModal(item);
 };
 
-const student_modal = ref("");
+const student_modal = ref();
 
 const header = ref([
   { title: "checkbox", value: "check" },
   { title: "ID", value: "_id" },
   { title: "Full name", value: "full_name" },
   { title: "Phone number", value: "phone" },
-  { title: "Courses", value: "courses" },
-  { title: "Groups", value: "groups" },
   { title: "Status", value: "status" },
   { title: "Action", value: "action" },
 ]);

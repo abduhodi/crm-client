@@ -11,7 +11,6 @@ export const useAdminStudentStore = defineStore("admin-student", {
   actions: {
     async addStudent(payload) {
       try {
-        this.loading = true;
         const res = await adminStudentApi.addStudent(payload);
         this.student = res.student;
         console.log(res);
@@ -21,7 +20,6 @@ export const useAdminStudentStore = defineStore("admin-student", {
         console.log(error);
         return false;
       } finally {
-        this.loading = false;
       }
     },
     async getStudents(params) {
@@ -40,7 +38,6 @@ export const useAdminStudentStore = defineStore("admin-student", {
     },
     async updateStudent(payload, param) {
       try {
-        this.loading = true;
         const res = await adminStudentApi.updateStudent(payload, param);
         this.student = res.student;
         console.log(res);
@@ -50,13 +47,11 @@ export const useAdminStudentStore = defineStore("admin-student", {
         console.log(error);
         return false;
       } finally {
-        this.loading = false;
       }
     },
 
     async deleteStudent(param) {
       try {
-        this.loading = true;
         const res = await adminStudentApi.deleteStudent(param);
         this.student = res.student;
         console.log(res);
@@ -66,7 +61,6 @@ export const useAdminStudentStore = defineStore("admin-student", {
         console.log(error);
         return false;
       } finally {
-        this.loading = false;
       }
     },
 

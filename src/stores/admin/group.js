@@ -11,7 +11,6 @@ export const useAdminGroupStore = defineStore("admin-group", {
   actions: {
     async addGroup(payload) {
       try {
-        this.loading = true;
         const res = await adminGroupApi.addGroup(payload);
         this.group = res.group;
         console.log(res);
@@ -21,7 +20,6 @@ export const useAdminGroupStore = defineStore("admin-group", {
         console.log(error);
         return false;
       } finally {
-        this.loading = false;
       }
     },
     async getGroups(params) {
@@ -40,7 +38,6 @@ export const useAdminGroupStore = defineStore("admin-group", {
     },
     async updateGroup(payload, param) {
       try {
-        this.loading = true;
         const res = await adminGroupApi.updateGroup(payload, param);
         this.group = res.group;
         return true;
@@ -49,13 +46,11 @@ export const useAdminGroupStore = defineStore("admin-group", {
         console.log(error);
         return false;
       } finally {
-        this.loading = false;
       }
     },
 
     async deleteGroup(param) {
       try {
-        this.loading = true;
         const res = await adminGroupApi.deleteGroup(param);
         this.group = res.group;
         return true;
@@ -64,7 +59,6 @@ export const useAdminGroupStore = defineStore("admin-group", {
         console.log(error);
         return false;
       } finally {
-        this.loading = false;
       }
     },
 
@@ -72,14 +66,26 @@ export const useAdminGroupStore = defineStore("admin-group", {
       try {
         this.loading = true;
         const res = await adminGroupApi.getGroupById(param);
-        this.group = res.group;
-        return true;
+        this.group = res?.group;
+        return res?.group;
       } catch (error) {
         this.error = error?.response?.data;
         console.log(error);
         return false;
       } finally {
         this.loading = false;
+      }
+    },
+
+    async getGroupStudents(param) {
+      try {
+        const res = await adminGroupApi.getGroupStudents(param);
+        return res;
+      } catch (error) {
+        this.error = error?.response?.data;
+        console.log(error);
+        return false;
+      } finally {
       }
     },
 
@@ -91,6 +97,41 @@ export const useAdminGroupStore = defineStore("admin-group", {
         this.error = error?.response?.data;
         console.log(error);
         return false;
+      } finally {
+      }
+    },
+
+    async addStudentToGroup(payload) {
+      try {
+        await adminGroupApi.addStudentToGroup(payload);
+        return true;
+      } catch (error) {
+        this.error = error?.response?.data;
+        console.log(error);
+        return false;
+      } finally {
+      }
+    },
+
+    async addTeacherToGroup(payload) {
+      try {
+        await adminGroupApi.addTeacherToGroup(payload);
+        return true;
+      } catch (error) {
+        this.error = error?.response?.data;
+        console.log(error);
+        return false;
+      } finally {
+      }
+    },
+
+    async getGroupCourseTeachers(id) {
+      try {
+        const res = await adminGroupApi.getGroupCourseTeachers(id);
+        console.log(res);
+        return res;
+      } catch (error) {
+        this.error = error?.response?.data;
       } finally {
       }
     },

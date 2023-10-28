@@ -25,4 +25,24 @@ export const adminCourseApi = {
     const url = `courses/delete/${id}`;
     return axiosClient.delete(url);
   },
+
+  addTeacherToCourse(payload) {
+    const url = `courses/add-teacher`;
+    return axiosClient.post(url, payload);
+  },
+
+  getCourseTeachers(id) {
+    const url = `courses/all-teachers/${id}`;
+    return axiosClient.get(url);
+  },
+
+  searchTeachers(payload) {
+    const url = `teachers/search`;
+    return axiosClient.post(url, payload);
+  },
+
+  getCourseGroups(id) {
+    const url = `groups/course/${id}/q?`;
+    return axiosClient.get(url);
+  },
 };

@@ -70,6 +70,7 @@ onMounted(async () => {
   console.log(route.params.id, "single");
   await store.getStudentById(route.params.id);
   data.value = store.student;
+  console.log(data.value);
 });
 
 const back = () => {

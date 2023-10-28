@@ -14,6 +14,7 @@ export const useAuthStore = defineStore("auth", {
         this.loading = true;
         const data = await authApi.login(payload);
         this.user = JSON.parse(JSON.stringify(data));
+        localStorage.setItem("user", JSON.stringify(data?.user));
         if (data?.tokens?.access_token) {
           localStorage.setItem("token", data.tokens.access_token);
           localStorage.setItem("role", data?.user?.role);
@@ -49,7 +50,6 @@ export const useAuthStore = defineStore("auth", {
         this.loading = true;
         const res = await authApi.getProfileInfo();
         this.user = { ...res };
-        console.log(res);
       } catch (error) {
         this.error = error?.response?.data?.message;
         console.log(error);

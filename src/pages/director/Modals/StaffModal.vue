@@ -16,7 +16,7 @@
       <div class="flex justify-center items-center w-full gap-3">
         <VButton
           btn_type="danger"
-          :isLoading="store.loading"
+          :isLoading="loading"
           type="button"
           class="mt-5 text-[18px] px-8"
           @click="confirm"
@@ -41,12 +41,12 @@
     </h1>
     <div class="flex justify-between items-center gap-3 mb-2">
       <label
-        for="room"
+        for="role"
         class="text-[19px] text-color1 font-medium mb-1 inline-block"
         >Select Role
       </label>
       <select
-        id="room"
+        id="role"
         v-model="forms.role"
         @change="handleRolePicker"
         class="outline-none border px-2 rounded-md py-2 text-sm"
@@ -83,7 +83,7 @@
       ></VInput>
       <VButton
         btn_type="primary"
-        :isLoading="store.loading"
+        :isLoading="loading"
         type="submit"
         class="mt-5 w-full text-[18px]"
       >
@@ -108,11 +108,12 @@ const store = useDirectorStaffsStore();
 const openDeleteModal = ref(false);
 const openEditModal = ref(false);
 
-const roles = ref([]);
 const role = ref();
 
+const loading = ref(false);
+
 const title = ref("Add New Staff");
-const ID = ref(null);
+const ID = ref("");
 const del_title = ref("Are you sure to delete?");
 const btn_title = computed(() => {
   if (store.loading) {
@@ -120,6 +121,10 @@ const btn_title = computed(() => {
   } else {
     return "Save";
   }
+});
+
+const props = defineProps({
+  roles: [],
 });
 
 const forms = ref({
@@ -142,13 +147,13 @@ watch(openEditModal, (val) => {
 });
 
 const openModal = async (item) => {
-  roles.value = await store.getRoles();
   if (item._id) {
     forms.value = { ...item };
     title.value = "Edit Staff";
     console.log(forms.value, "forms");
   }
   openEditModal.value = true;
+  loading.value = false;
 };
 
 const openDelModal = (id) => {
@@ -173,6 +178,8 @@ const schema = computed(() => {
 });
 
 const addStaff = async (value) => {
+  loading.value = true;
+  console.log(forms.value);
   if (forms.value?._id) {
     // const res = await store.updateStaff(
     //   {
@@ -199,6 +206,7 @@ const addStaff = async (value) => {
         .split("")
         .filter((char) => char === "+" || !isNaN(+char))
         .join(""),
+      role: forms.value.role,
     });
     if (res) {
       success("successfully added ");
@@ -208,16 +216,19 @@ const addStaff = async (value) => {
       danger(store.error);
     }
   }
+  loading.value = false;
 };
 
 const confirm = async () => {
+  loading.value = true;
   const res = await store.deleteStaff(ID.value);
   if (res) {
-    warning("Deleted success");
+    success("Deleted success");
   } else {
     danger("Failed!");
   }
   openDeleteModal.value = false;
+  loading.value = false;
   location.reload();
 };
 

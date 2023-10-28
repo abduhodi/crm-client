@@ -16,7 +16,7 @@
       <div class="flex justify-center items-center w-full gap-3">
         <VButton
           btn_type="danger"
-          :isLoading="store.loading"
+          :isLoading="loading"
           type="button"
           class="mt-5 text-[18px] px-8"
           @click="confirm"
@@ -66,7 +66,7 @@
       ></VInput>
       <VButton
         btn_type="primary"
-        :isLoading="store.loading"
+        :isLoading="loading"
         type="submit"
         class="mt-5 w-full text-[18px]"
       >
@@ -88,6 +88,8 @@ import { mdiAlertCircleOutline } from "@mdi/js";
 
 const store = useAdminCourseStore();
 
+const loading = ref(false);
+
 const openDeleteModal = ref(false);
 const openEditModal = ref(false);
 
@@ -104,8 +106,8 @@ const btn_title = computed(() => {
 
 const forms = ref({
   name: "",
-  price: 0,
-  period: 0,
+  price: null,
+  period: null,
 });
 
 watch(openEditModal, (val) => {
@@ -145,6 +147,7 @@ const schema = computed(() => {
 });
 
 const addCourse = async (value) => {
+  loading.value = true;
   if (forms.value?._id) {
     const res = await store.updateCourse(
       {
@@ -161,7 +164,7 @@ const addCourse = async (value) => {
       danger(store.error.message);
     }
   } else {
-    const res = await store.addStudent({
+    const res = await store.addCourse({
       ...value,
     });
     if (res) {
@@ -172,10 +175,13 @@ const addCourse = async (value) => {
       danger(store.error);
     }
   }
+  loading.value = false;
 };
 
 const confirm = async () => {
+  loading.value = true;
   const res = await store.deleteCourse(ID.value);
+  loading.value = false;
   if (res) {
     warning("Deleted success");
   } else {

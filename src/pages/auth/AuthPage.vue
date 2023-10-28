@@ -83,7 +83,6 @@ const save = async (values) => {
   } else {
     success("Login Success");
   }
-  console.log(authStore.user);
   loading.value = false;
 };
 </script>

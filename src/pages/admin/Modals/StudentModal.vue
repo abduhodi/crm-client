@@ -16,7 +16,7 @@
       <div class="flex justify-center items-center w-full gap-3">
         <VButton
           btn_type="danger"
-          :isLoading="store.loading"
+          :isLoading="loading"
           type="button"
           class="mt-5 text-[18px] px-8"
           @click="confirm"
@@ -65,7 +65,7 @@
       ></VInput>
       <VButton
         btn_type="primary"
-        :isLoading="store.loading"
+        :isLoading="loading"
         type="submit"
         class="mt-5 w-full text-[18px]"
       >
@@ -87,6 +87,8 @@ import { mdiAlertCircleOutline } from "@mdi/js";
 
 const store = useAdminStudentStore();
 
+const loading = ref(false);
+
 const openDeleteModal = ref(false);
 const openEditModal = ref(false);
 
@@ -101,7 +103,7 @@ const btn_title = computed(() => {
   }
 });
 
-const forms = ref({
+let forms = reactive({
   first_name: "",
   last_name: "",
   phone: "",
@@ -109,16 +111,19 @@ const forms = ref({
 
 watch(openEditModal, (val) => {
   if (!val) {
-    forms.value = {};
+    forms = {
+      first_name: "",
+      last_name: "",
+      phone: "",
+    };
     title.value = "Add New Student";
   }
 });
 
 const openModal = (item) => {
   if (item._id) {
-    forms.value = { ...item };
+    forms = { ...item };
     title.value = "Edit Student";
-    console.log(forms.value, "forms");
   }
   openEditModal.value = true;
 };
@@ -145,7 +150,8 @@ const schema = computed(() => {
 });
 
 const addStudent = async (value) => {
-  if (forms.value?._id) {
+  loading.value = true;
+  if (forms?._id) {
     const res = await store.updateStudent(
       {
         ...value,
@@ -154,7 +160,7 @@ const addStudent = async (value) => {
           .filter((char) => char === "+" || !isNaN(+char))
           .join(""),
       },
-      forms.value?._id
+      forms?._id
     );
     if (res) {
       success("successfully updated ");
@@ -180,10 +186,13 @@ const addStudent = async (value) => {
       danger(store.error);
     }
   }
+  loading.value = false;
 };
 
 const confirm = async () => {
+  loading.value = true;
   const res = await store.deleteStudent(ID.value);
+  loading.value = false;
   if (res) {
     warning("Deleted success");
   } else {

@@ -16,7 +16,7 @@
       <div class="flex justify-center items-center w-full gap-3">
         <VButton
           btn_type="danger"
-          :isLoading="store.loading"
+          :isLoading="loading"
           type="button"
           class="mt-5 text-[18px] px-8"
           @click="confirm"
@@ -50,6 +50,7 @@
         type="text"
         v-model="forms.name"
         required
+        placeholder="Enter group name"
         class="border w-full px-3 py-[6px] text-lg rounded-lg outline-none mb-2"
       />
       <div class="flex justify-between items-center gap-3 mb-2">
@@ -66,6 +67,7 @@
           :size="size"
           :disabled-date="disabledDate"
           @change="handleDatePicker"
+          style="width: 100%"
         />
       </div>
       <p class="text-[14px] text-color1 font-medium mb-1 inline-block w-full">
@@ -102,7 +104,7 @@
           id="days"
           v-model="days"
           @change="handleDays"
-          class="outline-none border px-2 py-2 text-sm rounded-md"
+          class="outline-none border px-2 py-2 text-sm rounded-md w-1/2"
         >
           <option value="" selected hidden>Select days</option>
           <option value="odd">Odd days</option>
@@ -128,13 +130,12 @@
           >
           <select
             id="status"
-            v-model="status"
-            @change="handleStatus"
+            v-model="forms.status"
             class="outline-none border px-2 rounded-md py-2 text-sm"
           >
             <option value="" hidden selected>Select status</option>
-            <option value="yes">Started</option>
-            <option value="no" selected>Not Started</option>
+            <option :value="true">Started</option>
+            <option :value="false" selected>Not Started</option>
           </select>
         </div>
         <div class="flex justify-between items-center gap-3 mb-2">
@@ -145,8 +146,7 @@
           >
           <select
             id="room"
-            v-model="room"
-            @change="handleRoomsPicker"
+            v-model="forms.room"
             class="outline-none border px-2 rounded-md py-2 text-sm"
           >
             <option value="" hidden selected>Select room</option>
@@ -167,7 +167,7 @@
           >
           <select
             id="course"
-            v-model="course"
+            v-model="forms.course"
             @change="handleCoursesPicker"
             class="outline-none border px-2 rounded-md py-2 text-sm"
           >
@@ -185,7 +185,7 @@
         <VButton
           @click="handleSubmit"
           btn_type="primary"
-          :isLoading="store.loading"
+          :isLoading="loading"
           type="button"
           class="mt-5 w-full text-[14px]"
         >
@@ -210,6 +210,8 @@ import moment from "moment";
 
 const courseStore = useAdminCourseStore();
 const store = useAdminGroupStore();
+
+const loading = ref(false);
 
 const openDeleteModal = ref(false);
 const openEditModal = ref(false);
@@ -284,16 +286,12 @@ const handleDays = () => {
   forms.value.days = days.value === "odd" ? true : false;
 };
 
-const handleStatus = () => {
-  forms.value.status = status.value === "yes" ? true : false;
-};
-
 const handleRoomsPicker = () => {
   forms.value.room = room.value;
 };
 
 const handleCoursesPicker = () => {
-  forms.value.course = course.value;
+  // forms.value.course = course.value;
 };
 
 const print = () => {
@@ -349,6 +347,7 @@ const closeModal = () => {
 };
 
 const handleSubmit = async () => {
+  loading.value = true;
   if (forms.value?._id) {
     const res = await store.updateGroup(
       {
@@ -376,10 +375,13 @@ const handleSubmit = async () => {
       danger(store.error);
     }
   }
+  loading.value = false;
 };
 
 const confirm = async () => {
+  loading.value = true;
   const res = await store.deleteGroup(ID.value);
+  loading.value = false;
   if (res) {
     warning("Deleted success");
   } else {

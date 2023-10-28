@@ -8,15 +8,25 @@
     <VSearch></VSearch>
     <div class="flex justify-center items-center gap-[10px] relative">
       <span
-        class="w-[35px] h-[35px] flex justify-center items-center bg-white rounded-full"
+        class="w-[35px] h-[35px] flex justify-center items-center bg-white rounded-full overflow-hidden"
       >
+        <img
+          v-if="profileStore?.user?.image"
+          :src="profileStore?.user?.image"
+          alt="avatar"
+          class="w-full h-full object-cover"
+        />
         <svg-icon
+          v-else
           type="mdi"
           :path="mdiAccountOutline"
           class="text-[#002842]"
         ></svg-icon>
       </span>
-      <span class="text-white text-[14px] font-thin">John Doe</span>
+      <span class="text-white text-[14px] font-thin"
+        >{{ profileStore?.user?.first_name }}
+        {{ profileStore?.user?.last_name }}</span
+      >
       <div class="open_menu">
         <svg-icon
           type="mdi"
@@ -45,19 +55,22 @@
 import VSearch from "@/components/form/VSearch.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiAccountOutline, mdiChevronDown, mdiMenu } from "@mdi/js";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useSideBar } from "@/hooks/UseSideBar.js";
+import { useAuthStore } from "../../stores/auth/auth";
+
+const profileStore = useAuthStore();
+
 const isOpen = useSideBar();
 
 const open = ref(false);
 const rotate = (e) => {
   open.value = !open.value;
-  if (open.value) {
-    console.log((e.target.style.rotate = "180deg"));
-  } else {
-    console.log((e.target.style.rotate = "0deg"));
-  }
 };
+
+onMounted(async () => {
+  await profileStore.getProfileInfo();
+});
 
 const logout = () => {
   localStorage.clear();

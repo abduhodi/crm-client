@@ -1,24 +1,28 @@
 <template>
   <div
-    class="w-[800px] p-5 flex gap-[50px] font-medium rounded-[10px] border bg-white border-[#12486B]/30 shadow-lg"
+    class="w-[800px] p-5 flex gap-[50px] pb-14 font-medium rounded-[10px] border bg-white border-[#12486B]/30 shadow-lg"
   >
     <div
-      class="w-1/2 flex flex-col justify-center items-center gap-5 mb-2 mt-2 relative"
+      class="w-1/2 flex flex-col justify-center items-center gap-5 mb-2 mt-2"
     >
       <div
-        class="w-44 h-44 rounded-full overflow-hidden flex justify-center items-center border shadow-md"
+        class="w-44 h-44 rounded-full overflow-hidden flex justify-center items-center border shadow-md relative"
       >
         <img
           :src="data?.image ? data?.image : 'src/assets/images/avatar.png'"
           alt="avatar"
           class="w-full h-full object-cover"
         />
-        <svg-icon
-          @click="uploadFile()"
-          type="mdi"
-          :path="mdiPencil"
-          class="hover:text-orange-600 absolute w-[28px] h-[28px] text-color1 top-[180px] right-[60px]"
-        ></svg-icon>
+        <span
+          class="w-full h-10 bg-transparent/30 bottom-0 absolute flex justify-center items-center"
+        >
+          <svg-icon
+            @click="uploadFile()"
+            type="mdi"
+            :path="mdiCameraPlusOutline"
+            class="hover:text-orange-700 w-[28px] h-[28px] text-color1 cursor-pointer"
+          ></svg-icon>
+        </span>
         <input
           type="file"
           id="fileInput"
@@ -106,7 +110,7 @@
 
 <script setup>
 import SvgIcon from "@jamescoyle/vue-icon";
-import { mdiPencil } from "@mdi/js";
+import { mdiPencil, mdiCameraPlusOutline } from "@mdi/js";
 import VInput from "@/components/form/VInput.vue";
 import { computed, ref, watch } from "vue";
 import { useAuthStore } from "@/stores/auth/auth.js";
@@ -165,7 +169,9 @@ const updateProfile = async (values) => {
     image: props.data?.image,
   };
   await authStore.profileUpdate(payload);
+
   disabled.value = true;
+
   success("Saved");
 };
 

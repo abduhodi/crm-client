@@ -7,7 +7,7 @@ export const adminStudentApi = {
   },
 
   getStudentById(id) {
-    const url = `admin/get-students/${id}`;
+    const url = `admin/get-student/${id}`;
     return axiosClient.get(url);
   },
 
