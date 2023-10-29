@@ -17,7 +17,7 @@
           `${data?.first_name} ${data?.last_name}`
         }}</span>
         <span class="text-[#6E737B] text-[12px] font-medium">{{
-          `Pupil ID: ${data?._id}`
+          `ID: ${data?._id}`
         }}</span>
       </div>
     </div>
@@ -29,19 +29,13 @@
           >Groups:</span
         >
         <SingleStudentCourse
+          @click="goGroup(group?.group?._id)"
+          v-for="(group, ind) in groups"
+          :key="ind"
           :data="{
-            name: 'Course title',
-            teacher: 'Hakimov Doniyor',
-            city: 'Namangan',
-            group: 'Al - Beruniy(12 kishilik)',
-          }"
-        ></SingleStudentCourse>
-        <SingleStudentCourse
-          :data="{
-            name: 'Course title',
-            teacher: 'Hakimov Doniyor',
-            city: 'Namangan',
-            group: 'Al - Beruniy(12 kishilik)',
+            name: group?.group?.course?.name,
+            status: group?.status,
+            group: group?.group?.name,
           }"
         ></SingleStudentCourse>
       </div>
@@ -55,7 +49,6 @@ import Loader from "@/components/loader/Loader.vue";
 import StudentInfoCard from "@/components/card/StudentInfoCard.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiArrowLeft } from "@mdi/js";
-
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useAdminStudentStore } from "@/stores/admin/student";
@@ -65,13 +58,18 @@ const route = useRoute();
 const router = useRouter();
 
 const data = ref({});
+const groups = ref([]);
 
 onMounted(async () => {
-  console.log(route.params.id, "single");
-  await store.getStudentById(route.params.id);
-  data.value = store.student;
-  console.log(data.value);
+  [data.value, groups.value] = await Promise.all([
+    store.getStudentById(route.params.id),
+    store.getStudentGroups(route.params.id),
+  ]);
 });
+
+const goGroup = (id) => {
+  router.push({ path: "/groups/" + id });
+};
 
 const back = () => {
   router.push({ path: "/students" });

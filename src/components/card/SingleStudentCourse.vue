@@ -4,11 +4,15 @@
   >
     <div>
       <span class="text-[#0D1523] text-[16px] font-medium">{{
-        data?.name
+        data?.name ? data.name : "---"
       }}</span>
       <span
-        class="text-[#6E737B] text-[12px] font-normal flex justify-start items-center gap-3"
-        >{{ data?.teacher }} • {{ data?.city }} • {{ data?.group }}</span
+        class="text-[#6E737B] text-[16px] font-normal flex justify-start items-center gap-3"
+        ><span
+          class="w-4 h-4 rounded-full bg-green-600"
+          :class="{ 'bg-red-600': !data?.status }"
+        ></span>
+        {{ data?.group ? data.group : "---" }}</span
       >
     </div>
     <svg-icon
@@ -25,10 +29,9 @@ import { mdiChevronRight } from "@mdi/js";
 
 const props = defineProps({
   data: {
-    name: "Course title",
-    teacher: "Hakimov_Doniyor",
-    city: "Namangan",
-    group: "Al - Beruniy(12 kishilik)",
+    name: String,
+    status: String,
+    group: String,
   },
 });
 </script>

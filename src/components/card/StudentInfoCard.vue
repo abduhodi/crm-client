@@ -29,25 +29,26 @@
     <span class="w-full h-[1px] bg-[#CFD0D3]"></span>
     <div class="w-full flex justify-between items-center">
       <span class="text-[#3D444F] text-[12px]">Register date:</span>
-      <span class="text-[#0D1523] text-[14px]">{{ data?.register_date }}</span>
-    </div>
-    <span class="w-full h-[1px] bg-[#CFD0D3]"></span>
-    <div class="w-full flex justify-between items-center">
-      <span class="text-[#3D444F] text-[12px]">Birthday:</span>
-      <span class="text-[#0D1523] text-[14px]">{{ data?.birthday }}</span>
+      <span class="text-[#065FD4] text-[14px]">{{
+        formatDate(data?.start_date)
+      }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-const data = defineProps({
-  first_name: "ism",
-  last_name: "familiya",
-  status: "status",
-  payment_status: "payment status",
-  phone: "phone number",
-  register_date: "register date",
-  birthday: "birthday",
+import { formatDate } from "@/plugins/moment.js";
+
+const props = defineProps({
+  data: {
+    first_name: "ism",
+    last_name: "familiya",
+    status: "status",
+    payment_status: "payment status",
+    phone: "phone number",
+    register_date: "register date",
+    birthday: "birthday",
+  },
 });
 </script>
 

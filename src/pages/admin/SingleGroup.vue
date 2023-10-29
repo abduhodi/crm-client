@@ -3,6 +3,16 @@
   <div v-else>
     <add-student ref="openModal" />
     <add-teacher ref="openAddTeacherModal" :data="students[0]?.course?._id" />
+    <span
+      @click="back"
+      class="w-9 h-9 border border-[#12486B] bg-[#EBEEF3] hover:bg-[#dee3e9] flex justify-center items-center rounded-full cursor-pointer"
+    >
+      <svg-icon
+        type="mdi"
+        :path="mdiArrowLeft"
+        class="text-[#12486B] w-5 h-5"
+      ></svg-icon>
+    </span>
     <div class="w-full flex justify-between items-start mt-3 gap-5">
       <div
         class="w-[315px] p-5 flex flex-col gap-[15px] font-medium rounded-[10px] border bg-white border-[#12486B]"
@@ -41,7 +51,7 @@
         <div class="w-full flex justify-between items-center">
           <span class="text-[#3D444F] text-[12px]">End time:</span>
           <span class="text-[#065FD4] text-[14px]">{{
-            formatTime(group?.start_time)
+            formatTime(group?.end_time)
           }}</span>
         </div>
         <span class="w-full h-[1px] bg-[#CFD0D3]"></span>
@@ -104,20 +114,27 @@
 <script setup>
 import { useAdminGroupStore } from "@/stores/admin/group.js";
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { formatDate, formatTime } from "@/plugins/moment.js";
 import VButton from "@/components/form/VButton.vue";
 import AddStudent from "@/pages/admin/Modals/AddStudent.vue";
 import accordion from "@/components/ui/accordion.vue";
 import AddTeacher from "@/pages/admin/Modals/AddTeacher.vue";
 import Loader from "@/components/loader/Loader.vue";
+import SvgIcon from "@jamescoyle/vue-icon";
+import { mdiArrowLeft } from "@mdi/js";
 
 const route = useRoute();
+const router = useRouter();
 const store = useAdminGroupStore();
 const loading = ref(false);
 
 const openModal = ref();
 const openAddTeacherModal = ref();
+
+const back = () => {
+  router.push({ path: "/students" });
+};
 
 const openAddModal = () => {
   openModal.value.openModal();

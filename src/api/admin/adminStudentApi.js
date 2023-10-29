@@ -11,6 +11,11 @@ export const adminStudentApi = {
     return axiosClient.get(url);
   },
 
+  getStudentGroups(id) {
+    const url = `students/groups/${id}`;
+    return axiosClient.get(url);
+  },
+
   addStudent(payload) {
     const url = `admin/add-student`;
     return axiosClient.post(url, payload);

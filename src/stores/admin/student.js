@@ -40,7 +40,6 @@ export const useAdminStudentStore = defineStore("admin-student", {
       try {
         const res = await adminStudentApi.updateStudent(payload, param);
         this.student = res.student;
-        console.log(res);
         return true;
       } catch (error) {
         this.error = error?.response?.data;
@@ -54,7 +53,6 @@ export const useAdminStudentStore = defineStore("admin-student", {
       try {
         const res = await adminStudentApi.deleteStudent(param);
         this.student = res.student;
-        console.log(res);
         return true;
       } catch (error) {
         this.error = error?.response?.data;
@@ -68,9 +66,21 @@ export const useAdminStudentStore = defineStore("admin-student", {
       try {
         this.loading = true;
         const res = await adminStudentApi.getStudentById(param);
-        this.student = res.student;
-        console.log(res);
-        return true;
+        return res?.student;
+      } catch (error) {
+        this.error = error?.response?.data;
+        console.log(error);
+        return false;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async getStudentGroups(id) {
+      try {
+        const res = await adminStudentApi.getStudentGroups(id);
+        console.log(res?.groups);
+        return res?.groups;
       } catch (error) {
         this.error = error?.response?.data;
         console.log(error);

@@ -3,6 +3,16 @@
   <div v-else>
     <add-student ref="openModal" />
     <add-teacher ref="openAddTeacherModal" :data="$route?.params?.id" />
+    <span
+      @click="back"
+      class="w-9 h-9 border border-[#12486B] bg-[#EBEEF3] hover:bg-[#dee3e9] flex justify-center items-center rounded-full cursor-pointer"
+    >
+      <svg-icon
+        type="mdi"
+        :path="mdiArrowLeft"
+        class="text-[#12486B] w-5 h-5"
+      ></svg-icon>
+    </span>
     <div class="w-full flex justify-between items-start mt-3 gap-5">
       <div
         class="w-[315px] p-5 flex flex-col gap-[15px] font-medium rounded-[10px] border bg-white border-[#12486B]"
@@ -49,6 +59,7 @@
     </div>
     <div class="w-full flex items-center justify-start gap-5 flex-wrap mt-5">
       <div
+        @click="goGroup(group?._id)"
         v-for="(group, ind) in groups"
         :key="ind"
         class="w-[200px] h-[300px] relative border border-color1/20 rounded-lg shadow-lg flex flex-col cursor-pointer hover:shadow-2xl hover:text-color1 duration-200"
@@ -87,7 +98,7 @@
 <script setup>
 import { useAdminCourseStore } from "@/stores/admin/course";
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { formatDate, formatTime } from "@/plugins/moment.js";
 import VButton from "@/components/form/VButton.vue";
 import accordion from "@/components/ui/accordion.vue";
@@ -99,9 +110,11 @@ import {
   mdiSchool,
   mdiAccountGroup,
   mdiCalendarClock,
+  mdiArrowLeft,
 } from "@mdi/js";
 
 const route = useRoute();
+const router = useRouter();
 const store = useAdminCourseStore();
 const loading = ref(false);
 const teachers = ref([]);
@@ -109,6 +122,14 @@ const groups = ref([]);
 
 const openModal = ref();
 const openAddTeacherModal = ref();
+
+const back = () => {
+  router.push({ path: "/courses" });
+};
+
+const goGroup = (id) => {
+  router.push({ path: "/groups/" + id });
+};
 
 const openAddModal = () => {
   openModal.value.openModal();
