@@ -5,6 +5,18 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "http://34.125.211.64:3300/api/",
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {
+          "^/api": "",
+        },
+      },
+    },
+  },
   plugins: [vue()],
   resolve: {
     alias: {
