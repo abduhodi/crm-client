@@ -24,7 +24,7 @@
 
 <script setup>
 import Icon from "@jamescoyle/vue-icon";
-import { useSideBar } from "../../hooks/UseSideBar.js";
+import { useSideBar } from "../../hooks/UseSidebar";
 import { AdminMenu } from "@/components/menu/AdminMenu.js";
 import { DirectorMenu } from "@/components/menu/DirectorMenu.js";
 import { TeacherMenu } from "@/components/menu/TeacherMenu.js";
