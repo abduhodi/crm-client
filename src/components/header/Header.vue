@@ -56,7 +56,7 @@ import VSearch from "@/components/form/VSearch.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiAccountOutline, mdiChevronDown, mdiMenu } from "@mdi/js";
 import { onMounted, ref } from "vue";
-import { useSideBar } from "@/hooks/UseSideBar.js";
+import { useSideBar } from "../../hooks/UseSideBar.js";
 import { useAuthStore } from "../../stores/auth/auth";
 
 const profileStore = useAuthStore();
