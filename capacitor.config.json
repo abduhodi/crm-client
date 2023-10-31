@@ -1,0 +1,14 @@
+{
+  "appId": "com.adevat.uz",
+  "appName": "crm",
+  "bundledWebRuntime": false,
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "server": {
+    "androidScheme": "http"
+  }
+}

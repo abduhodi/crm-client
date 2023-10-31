@@ -77,5 +77,8 @@ const props = defineProps({
   .app-modal {
     width: 90%;
   }
+  .app-modal__body {
+    width: 100%;
+  }
 }
 </style>

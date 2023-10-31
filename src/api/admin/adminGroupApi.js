@@ -50,4 +50,9 @@ export const adminGroupApi = {
     const url = `courses/all-teachers/${id}`;
     return axiosClient.get(url);
   },
+
+  getGroupLessons(id) {
+    const url = `lessons/group/${id}/q?`;
+    return axiosClient.get(url);
+  },
 };

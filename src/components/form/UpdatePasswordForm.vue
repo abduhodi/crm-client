@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-1/3 flex flex-col p-5 font-medium rounded-[10px] border bg-white border-[#12486B]/30 shadow-lg"
+    class="lg:w-1/3 w-full mb-10 lg:mb-0 flex flex-col p-5 font-medium rounded-[10px] border bg-white border-[#12486B]/30 shadow-lg"
   >
     <h1 class="w-full text-center text-[24px] text-color1">Change Password</h1>
     <vee-form

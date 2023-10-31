@@ -5,7 +5,7 @@
     <button class="text-white lg:hidden" @click="isOpen = !isOpen">
       <svg-icon type="mdi" :path="mdiMenu" class="text-white"></svg-icon>
     </button>
-    <VSearch></VSearch>
+    <VSearch class="hidden sm:block"></VSearch>
     <div class="flex justify-center items-center gap-[10px] relative">
       <span
         class="w-[35px] h-[35px] flex justify-center items-center bg-white rounded-full overflow-hidden"

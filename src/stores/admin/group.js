@@ -135,5 +135,16 @@ export const useAdminGroupStore = defineStore("admin-group", {
       } finally {
       }
     },
+
+    async getGroupLessons(id) {
+      try {
+        const res = await adminGroupApi.getGroupLessons(id);
+        console.log(res);
+        return res;
+      } catch (error) {
+        this.error = error?.response?.data;
+      } finally {
+      }
+    },
   },
 });

@@ -1,5 +1,7 @@
 <template>
-  <div class="mt-3 flex justify-between items-start gap-10">
+  <div
+    class="mt-3 flex lg:flex-row flex-col justify-between items-start gap-10 bg-[#E7EDF0]"
+  >
     <profile-card :data="authStore?.user"></profile-card>
     <update-password-form></update-password-form>
   </div>

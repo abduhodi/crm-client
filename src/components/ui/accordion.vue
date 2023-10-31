@@ -21,7 +21,8 @@
           <div
             v-for="(attend, id) in item?.attendance"
             :key="id"
-            class="w-[50px] text-center py-1 text-[14px] text-color1 border border-color1 rounded-md hover:bg-color1/10 cursor-pointer"
+            class="w-[50px] text-center py-1 text-[14px] text-color1 border border-color1 rounded-md hover:bg-color1/10 cursor-pointer relative overflow-hidden"
+            :class="{ 'bg-transparent/30': attend?.pass }"
           >
             <el-popover
               placement="top-start"
@@ -34,6 +35,10 @@
                 {{ formatDay(attend?.date) }}
               </template>
             </el-popover>
+            <span
+              v-if="attend?.description"
+              class="w-4 h-4 bg-red-600 inline-block absolute rotate-45 -top-2"
+            ></span>
           </div>
         </div>
       </el-collapse-item>

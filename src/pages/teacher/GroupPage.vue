@@ -1,11 +1,14 @@
 <template>
   <div>
     <loader v-if="loading" />
-    <div v-else class="w-full flex items-center justify-start gap-5 flex-wrap">
+    <div
+      v-else
+      class="w-full flex items-center sm:justify-start justify-center gap-5 flex-wrap"
+    >
       <div
         v-for="(group, ind) in store?.groups"
         :key="ind"
-        class="w-[200px] h-[300px] relative border border-color1/20 rounded-lg shadow-lg flex flex-col cursor-pointer hover:shadow-2xl hover:text-color1 duration-200"
+        class="sm:w-[200px] w-full h-[300px] relative border border-color1/20 rounded-lg shadow-lg flex flex-col cursor-pointer hover:shadow-2xl hover:text-color1 duration-200"
         @click="singleGroup(group?._id)"
       >
         <span class="w-full text-[24px] text-center mt-5 font-medium">{{

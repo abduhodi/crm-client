@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-[800px] p-5 flex gap-[50px] pb-14 font-medium rounded-[10px] border bg-white border-[#12486B]/30 shadow-lg"
+    class="lg:w-[800px] w-full p-5 flex flex-col lg:flex-row gap-[50px] pb-14 font-medium rounded-[10px] border bg-white border-[#12486B]/30 shadow-lg"
   >
     <div
-      class="w-1/2 flex flex-col justify-center items-center gap-5 mb-2 mt-2"
+      class="lg:w-1/2 w-full flex flex-col justify-center items-center gap-5 lg:mb-2 mt-2"
     >
       <div
         class="w-44 h-44 rounded-full overflow-hidden flex justify-center items-center border shadow-md relative"
@@ -45,7 +45,7 @@
         }}</span>
       </div>
     </div>
-    <div class="w-1/2 flex flex-col">
+    <div class="lg:w-1/2 w-full flex flex-col">
       <vee-form
         :validation-schema="schema"
         :initial-values="props.data"

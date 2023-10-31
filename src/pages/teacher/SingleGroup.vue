@@ -1,7 +1,7 @@
 <template>
   <div class="mt-5">
     <loader v-if="loading" />
-    <div v-else>
+    <div v-else class="md:h-fit h-screen">
       <student-attendance ref="attendanceModal" />
       <div class="flex items-center gap-10 mb-5">
         <VButton
@@ -13,13 +13,14 @@
         >
         <select
           v-model="date"
-          class="px-5 py-2 rounded-md text-lg outline-none"
+          class="lg:px-5 py-2 rounded-md text-lg outline-none"
         >
           <option
             :value="att?.date"
             v-for="(att, ind) in students[0]?.attendance"
             :key="ind"
             :disabled="att?.pass"
+            class="text-xs px-5"
           >
             {{ formatDate(att?.date) }}
           </option>

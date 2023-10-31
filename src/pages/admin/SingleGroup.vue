@@ -3,6 +3,7 @@
   <div v-else>
     <add-student ref="openModal" />
     <add-teacher ref="openAddTeacherModal" :data="students[0]?.course?._id" />
+    <!-- <add-comment-lesson ref="openAddCommentModal" /> -->
     <span
       @click="back"
       class="w-9 h-9 border border-[#12486B] bg-[#EBEEF3] hover:bg-[#dee3e9] flex justify-center items-center rounded-full cursor-pointer"
@@ -13,9 +14,11 @@
         class="text-[#12486B] w-5 h-5"
       ></svg-icon>
     </span>
-    <div class="w-full flex justify-between items-start mt-3 gap-5">
+    <div
+      class="w-full flex lg:flex-row flex-col justify-between items-start mt-3 gap-5"
+    >
       <div
-        class="w-[315px] p-5 flex flex-col gap-[15px] font-medium rounded-[10px] border bg-white border-[#12486B]"
+        class="lg:w-[315px] w-full p-5 flex flex-col gap-[15px] font-medium rounded-[10px] border bg-white border-[#12486B]"
       >
         <div class="w-full flex justify-between items-center">
           <span class="text-[#3D444F] text-[12px]">ID:</span>
@@ -88,8 +91,8 @@
           </router-link>
         </div>
       </div>
-      <div class="flex flex-col gap-5 side">
-        <div class="flex justify-between items-center">
+      <div class="flex flex-col gap-5 lg:side w-full">
+        <div class="flex justify-between items-center lg:gap-0 gap-5">
           <VButton
             btn_type="primary"
             :isLoading="false"
@@ -105,7 +108,8 @@
             >Add Teacher</VButton
           >
         </div>
-        <accordion :data="students" />
+        <accordion-lessons :data="lessons?.lessons" />
+        <accordion :data="students" ref="openAddCommentModal" />
       </div>
     </div>
   </div>
@@ -119,15 +123,19 @@ import { formatDate, formatTime } from "@/plugins/moment.js";
 import VButton from "@/components/form/VButton.vue";
 import AddStudent from "@/pages/admin/Modals/AddStudent.vue";
 import accordion from "@/components/ui/accordion.vue";
+import accordionLessons from "@/components/ui/accordion-lessons.vue";
 import AddTeacher from "@/pages/admin/Modals/AddTeacher.vue";
 import Loader from "@/components/loader/Loader.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiArrowLeft } from "@mdi/js";
+import AddCommentLesson from "@/pages/admin/Modals/AddCommentLesson.vue";
 
 const route = useRoute();
 const router = useRouter();
 const store = useAdminGroupStore();
 const loading = ref(false);
+const students = ref([]);
+const lessons = ref([]);
 
 const openModal = ref();
 const openAddTeacherModal = ref();
@@ -147,13 +155,12 @@ const openTeacherAddModal = async () => {
   loading.value = false;
 };
 
-const students = ref([]);
-
 onMounted(async () => {
   const id = route.params?.id;
-  [students.value, group.value] = await Promise.all([
+  [students.value, group.value, lessons.value] = await Promise.all([
     store.getGroupStudents(id),
     store.getGroupById(id),
+    store.getGroupLessons(id),
   ]);
 });
 

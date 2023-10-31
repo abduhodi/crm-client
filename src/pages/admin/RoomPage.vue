@@ -5,7 +5,7 @@
     </div>
     <loader v-if="store.loading"></loader>
     <div v-else>
-      <div class="w-full flex justify-between items-center pr-5">
+      <div class="w-full flex justify-between items-center sm:pr-5 pr-1">
         <h1 class="text-[#002842] text-[22px] font-semibold uppercase">
           Rooms ({{ count }})
         </h1>
@@ -18,7 +18,7 @@
           >Add room</v-button
         >
       </div>
-      <div class="w-full mt-5">
+      <div class="w-full mt-5 overflow-auto">
         <Table
           v-if="store?.rooms?.length"
           :header="header"

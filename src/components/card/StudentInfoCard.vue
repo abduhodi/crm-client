@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-[315px] p-5 flex flex-col gap-[15px] font-medium rounded-[10px] border bg-white border-[#12486B]"
+    class="lg:w-[315px] w-full p-5 flex flex-col gap-[15px] font-medium rounded-[10px] border bg-white border-[#12486B]"
   >
     <div class="w-full flex justify-between items-center">
       <span class="text-[#3D444F] text-[12px]">First Name:</span>

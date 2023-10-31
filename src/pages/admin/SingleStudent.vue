@@ -1,6 +1,6 @@
 <template>
   <loader v-if="store.loading"></loader>
-  <div v-else class="w-full h-full pt-[30px]">
+  <div v-else class="w-full h-full lg:pt-[30px] pt-3">
     <div class="flex justify-start items-center gap-3">
       <span
         @click="back"
@@ -21,11 +21,13 @@
         }}</span>
       </div>
     </div>
-    <div class="w-full flex justify-start items-start gap-[30px] mt-[30px]">
+    <div
+      class="w-full flex lg:flex-row flex-col justify-start items-start gap-[30px] mt-[30px]"
+    >
       <student-info-card :data="data"></student-info-card>
-      <div class="">
+      <div class="w-full lg:w-auto mb-5">
         <span
-          class="text-[#0D1523] text-[16px] font-semibold inline-block mb-[30px]"
+          class="text-[#0D1523] text-[16px] font-semibold inline-block lg:mb-[30px] mb-3"
           >Groups:</span
         >
         <SingleStudentCourse

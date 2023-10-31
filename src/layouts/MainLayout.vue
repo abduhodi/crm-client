@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full h-screen flex select-none">
+  <div class="w-full md:h-screen min-h-screen flex select-none">
     <Sidebar class="h-full"></Sidebar>
-    <div class="w-full flex flex-col gap-2 bg-[#E7EDF0]">
+    <div class="w-full h-full flex flex-col gap-2 bg-[#E7EDF0]">
       <Header></Header>
-      <div class="pl-7 pb-5 pr-3 overflow-auto h-full">
+      <div class="sm:pl-7 pl-1 pb-5 sm:pr-3 pr-1 h-full overflow-y-auto">
         <router-view></router-view>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-screen flex justify-center items-center">
-    <div class="w-1/2 flex justify-center items-center h-full">
+    <div class="w-1/2 hidden justify-center items-center h-full sm:flex">
       <img
         src="@/assets/images/login_image.jpg"
         alt="login_page_image"
@@ -8,7 +8,7 @@
       />
     </div>
     <div
-      class="w-1/2 flex flex-col justify-center items-center gap-8 bg-color_bg h-full"
+      class="sm:w-1/2 w-full flex flex-col justify-center items-center sm:gap-8 gap-0 bg-color_bg h-full"
     >
       <div class="w-full text-center">
         <h1
@@ -16,12 +16,11 @@
         >
           WELCOME BACK
         </h1>
-        <p class="text-[20px] text-color1"></p>
       </div>
       <vee-form
         :validation-schema="schema"
         @submit="save"
-        class="w-3/5 flex flex-col gap-5"
+        class="sm:w-3/5 w-4/5 flex flex-col gap-5"
       >
         <VInput
           type="text"

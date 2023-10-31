@@ -16,7 +16,7 @@
       />
       <span
         @click="hide"
-        class="w-[10%] border-none outline-none rounded-e-lg p-2 text-[18px] placeholder:text-color1 bg-white cursor-pointer flex justify-center items-center py-[9px]"
+        class="w-[10%] border-none outline-none rounded-e-lg sm:p-2 p-1 text-[18px] placeholder:text-color1 bg-white cursor-pointer flex justify-center items-center py-[9px]"
       >
         <svg-icon
           v-if="hidden"

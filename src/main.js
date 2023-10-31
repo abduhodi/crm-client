@@ -19,6 +19,15 @@ import "element-plus/dist/index.css";
 
 import "../node_modules/nprogress/nprogress.css";
 
+import { createI18n } from "vue-i18n";
+const lang = localStorage.getItem("lang");
+const i18n = createI18n({
+  locale: lang || "uz",
+  fallbackLocale: "en",
+  legacy: false,
+  // messages,
+});
+
 const app = createApp(App);
 
 app.use(createPinia());
@@ -32,5 +41,6 @@ app.use(Vue3Toasity, {
 });
 app.use(VueAwesomePaginate);
 app.use(ElementPlus);
+app.use(i18n);
 
 app.mount("#app");

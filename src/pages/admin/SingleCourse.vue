@@ -1,6 +1,6 @@
 <template>
   <loader v-if="store.loading" />
-  <div v-else>
+  <div v-else class="sm:h-fit h-screen">
     <add-student ref="openModal" />
     <add-teacher ref="openAddTeacherModal" :data="$route?.params?.id" />
     <span
@@ -13,9 +13,11 @@
         class="text-[#12486B] w-5 h-5"
       ></svg-icon>
     </span>
-    <div class="w-full flex justify-between items-start mt-3 gap-5">
+    <div
+      class="w-full flex lg:flex-row flex-col justify-between items-start mt-3 gap-5"
+    >
       <div
-        class="w-[315px] p-5 flex flex-col gap-[15px] font-medium rounded-[10px] border bg-white border-[#12486B]"
+        class="lg:w-[315px] w-full p-5 flex flex-col gap-[15px] font-medium rounded-[10px] border bg-white border-[#12486B]"
       >
         <div class="w-full flex justify-between items-center">
           <span class="text-[#3D444F] text-[12px]">ID:</span>
@@ -32,7 +34,7 @@
           <span class="text-[#065FD4] text-[14px]">{{ course?.period }}</span>
         </div>
       </div>
-      <div class="flex flex-col gap-5 side">
+      <div class="flex flex-col gap-5 lg:side w-full">
         <div class="flex justify-between items-center">
           <VButton
             btn_type="success"
@@ -57,12 +59,14 @@
         </div>
       </div>
     </div>
-    <div class="w-full flex items-center justify-start gap-5 flex-wrap mt-5">
+    <div
+      class="w-full flex items-center lg:justify-start justify-center gap-5 flex-wrap mt-5"
+    >
       <div
         @click="goGroup(group?._id)"
         v-for="(group, ind) in groups"
         :key="ind"
-        class="w-[200px] h-[300px] relative border border-color1/20 rounded-lg shadow-lg flex flex-col cursor-pointer hover:shadow-2xl hover:text-color1 duration-200"
+        class="lg:w-[200px] w-full h-[300px] relative border border-color1/20 rounded-lg shadow-lg flex flex-col cursor-pointer hover:shadow-2xl hover:text-color1 duration-200"
       >
         <span class="w-full text-[24px] text-center mt-5 font-medium">{{
           group?.name

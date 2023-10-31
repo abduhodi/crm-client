@@ -1,13 +1,13 @@
 <template>
   <div
-    class="w-full flex justify-between items-center p-6 bg-[#FFFFFF] rounded-[6px] gap-52 cursor-pointer hover:bg-[#fafafa] mb-2"
+    class="w-full flex justify-between items-center p-6 bg-[#FFFFFF] rounded-[6px] lg:gap-52 cursor-pointer hover:bg-[#fafafa] mb-2"
   >
     <div>
       <span class="text-[#0D1523] text-[16px] font-medium">{{
         data?.name ? data.name : "---"
       }}</span>
       <span
-        class="text-[#6E737B] text-[16px] font-normal flex justify-start items-center gap-3"
+        class="text-[#6E737B] text-[16px] w-fit font-normal flex justify-start items-center gap-3"
         ><span
           class="w-4 h-4 rounded-full bg-green-600"
           :class="{ 'bg-red-600': !data?.status }"
