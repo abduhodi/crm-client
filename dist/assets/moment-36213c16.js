@@ -1,0 +1,1 @@
+import{h as o}from"./moment-a9aaa855.js";function s(t){return o(new Date(t)).format("DD.MM.YYYY")}function f(t){return o(new Date(t)).format("DD.MM")}function u(t){const r=o.duration(t,"minutes"),a=Math.floor(r.asHours()),n=Math.floor(r.asMinutes())-a*60;return o({hour:a,minute:n}).format("HH:mm")}export{u as a,f as b,s as f};
